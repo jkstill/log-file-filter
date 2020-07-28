@@ -1,0 +1,12 @@
+#INCLUDE/EXCLUDE:CONTEXT_LINES_BEFORE:CONTEXT_LINES_AFTER:CASE_SENSITIVE Y/N
+INCLUDE:2:3:N
+Errors in file 
+ORA-[[:digit:]]{1,}
+Starting ORACLE instance
+shutdown
+WARNING:
+ERROR
+Set master node info
+alter system
+alter database
+deadlock
