@@ -251,7 +251,7 @@ Jul  5 03:13:02 ora192rac01 systemd: Removed slice User Slice of oracle.
 
 Time to filter out more stuff.
 
-At this time it seems a good idea to script this, as the command line will get unweildy otherwise
+At this time it seems a good idea to script this, as the command line will get unwieldy otherwise
 
 Two files were created:
 
@@ -652,7 +652,7 @@ The problem with that approach is that we don't always know just what we are loo
 
 A start has been made on a set of inclusive rules for Oracle Alert logs; more on that later.
 
-As sometimes we want to use an inclusive search, and other times an execlusive search, provision is made to reserve the first 2 lines of the rules files for configuration
+As sometimes we want to use an inclusive search, and other times an exclusive search, provision is made to reserve the first 2 lines of the rules files for configuration
 
 Here is an exclusive file, `log-filter.rules`.
 
