@@ -2,7 +2,7 @@
 Filtering Log Files
 ===================
 
-It is not really possible to write rules about how to deal with the influx of data that may appear in a logfile.
+It is not really possible to write comprehensive rules about how to deal with the influx of data that may appear in a logfile.
 
 (this is why machine learning is good for huge numbers of logs)
 
