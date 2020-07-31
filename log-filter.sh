@@ -23,43 +23,59 @@ export GREP_COLORS='mt=30;47'
 declare configLine
 configLine=$(tail -n+2 $rulesFile  | head -1)
 
-declare ruleType contextLinesBefore contextLinesAfter caseSensitive grepColor grepColors
+declare -A configNameRef configVals
 
-ruleType=$(echo $configLine | cut -f1 -d:)
-contextLinesBefore=$(echo $configLine | cut -f2 -d:)
-contextLinesAfter=$(echo $configLine | cut -f3 -d:)
-caseSensitive=$(echo $configLine | cut -f4 -d:)
-grepColor=$(echo $configLine | cut -f5 -d:)
-grepColors=$(echo $configLine | cut -f6 -d:)
+configNameRef[0]='ruleType'
+configNameRef[1]='contextLinesBefore'
+configNameRef[2]='contextLinesAfter'
+configNameRef[3]='caseSensitive'
+configNameRef[4]='grepColor'
+configNameRef[5]='grepColors'
 
 declare grepIncExFlag
 
-if [[ $ruleType == 'INCLUDE' ]]; then
+IFS=':'
+
+declare i=0
+for parm in $configLine
+do
+
+	#echo parm: $parm
+	#echo ${configNameRef[$i]}
+
+	configVals[${configNameRef[$i]}]=$parm
+	(( i++ ))
+
+done
+
+unset IFS i
+
+if [[ ${configVals[ruleType]} == 'INCLUDE' ]]; then
 	grepIncExFlag=''
-elif [[ $ruleType = 'EXCLUDE' ]]; then
+elif [[ ${configVals[ruleType]} = 'EXCLUDE' ]]; then
 	grepIncExFlag='-v'
 else
 	echo
-	echo "ruleType of $ruleType is unknown"
+	echo "ruleType of ${configVals[ruleType]} is unknown"
 	echo
 	exit 1
 fi
 
 # validate the color codes
-echo $grepColors | grep -E 'mt=3[0-9];4[0-9]|mt=38;5;[0-9]{1,3};48;5;[0-9]{1,3}' > /dev/null
-[[ (( $? == 0 )) ]] && { export GREP_COLORS=$grepColors; }
+echo ${configVals[grepColors]} | grep -E 'mt=3[0-9];4[0-9]|mt=38;5;[0-9]{1,3};48;5;[0-9]{1,3}' > /dev/null
+[[ (( $? == 0 )) ]] && { export GREP_COLORS=${configVals[grepColors]}; }
 
 declare contextBeforeOption='' contextAfterOption=''
 
-[[ $contextLinesBefore -gt 0 ]] && { contextBeforeOption="-B $contextLinesBefore"; }
-[[ $contextLinesAfter -gt 0 ]] && { contextAfterOption="-A $contextLinesAfter"; }
+[[ ${configVals[contextLinesBefore]} -gt 0 ]] && { contextBeforeOption="-B ${configVals[contextLinesBefore]}"; }
+[[ ${configVals[contextLinesAfter]} -gt 0 ]] && { contextAfterOption="-A ${configVals[contextLinesAfter]}"; }
 
 declare caseSensitivityFlag=''
-[[ $caseSensitive == 'N' ]] && { caseSensitivityFlag='-i'; }
+[[ ${configVals[caseSensitive]} == 'N' ]] && { caseSensitivityFlag='-i'; }
 
 declare grepColorFlag='auto'
 
-case $grepColor in
+case ${configVals[grepColor]} in
 	Y|y) grepColorFlag='always';;
 	A|a) grepColorFlag='auto';;
 	N|n) grepColorFlag='never';;
