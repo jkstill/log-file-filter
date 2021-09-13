@@ -757,3 +757,13 @@ It is best piped through `more` or `less -r`
 `./grep-colors.sh 256 | more`
 
 ![grep-colors.sh](grep-colors-256.png)
+
+## always-exclude.rules
+
+The alert log is now filtered with the rules in this file before processing with `ora-alert.rules`.
+
+This currently removes `ALTER SYSTEM ARCHIVE LOG` and `ORA-06512`.
+
+The ORa-06512 error is not useful in this context, as it is an ancillary error message
+
+

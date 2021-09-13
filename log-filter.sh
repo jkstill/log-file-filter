@@ -99,5 +99,11 @@ Never output ANSI color codes
 
 GREP-COLOR-COMMENTS
 
-grep --color=$grepColorFlag -E $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile) $msgFile
+#grep --color=$grepColorFlag -E $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile) $msgFile
+
+# use the exclude file to filter out things we never want to see
+
+grep --color=$grepColorFlag -v -f always-exclude.rules $msgFile | \
+	grep --color=$grepColorFlag -E $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile)
+
 
