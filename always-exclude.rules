@@ -1,3 +1,4 @@
 # do not leave any blank lines
 ORA-06512
+ORA-06550
 ALTER SYSTEM ARCHIVE LOG

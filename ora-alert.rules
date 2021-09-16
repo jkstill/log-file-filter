@@ -2,6 +2,8 @@
 INCLUDE:2:3:N:Y:mt=38;5;15;48;5;18
 Errors in file
 ORA-[[:digit:]]{1,}
+PLS[[:digit:]]{1,}
+TNS[[:digit:]]{1,}
 Starting ORACLE instance
 shutdown
 WARNING:
