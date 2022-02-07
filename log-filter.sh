@@ -103,7 +103,8 @@ GREP-COLOR-COMMENTS
 
 # use the exclude file to filter out things we never want to see
 
-grep --color=$grepColorFlag -v -f always-exclude.rules $msgFile | \
+# remove comments and blank lines from the exclusion file
+grep --color=$grepColorFlag -vE -f <(grep -vE '^\s+#|^\s*$' always-exclude.rules) $msgFile | \
 	grep --color=$grepColorFlag -E $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile)
 
 

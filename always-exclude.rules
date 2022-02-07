@@ -1,6 +1,14 @@
-# do not leave any blank lines
+# blank lines and comments stripped at runtime
 ORA-06512
 ORA-06550
 PLS-00352
 PLS-00201
 ALTER SYSTEM ARCHIVE LOG
+CAPTURE OGG
+GoldenGate Capture OGG
+Thread 1 advanced to log sequence
+Current log#
+# exclude ARC archive log info lines
+^ARC[[:digit:]]
+# exclude timestamps at the beginning of the line
+^202[[:digit:]]-[[:digit:]]{2}-[[:digit:]]{2}
