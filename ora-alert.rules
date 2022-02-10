@@ -1,9 +1,9 @@
-#INCLUDE/EXCLUDE:CONTEXT_LINES_BEFORE:CONTEXT_LINES_AFTER:CASE_SENSITIVE Y/N:GREP_COLOR [Y]es/[A]uto/[N]ever:GREP_COLORS(does not work with EXCLUDE)
-INCLUDE:2:3:N:Y:mt=38;5;15;48;5;18
+#INCLUDE/EXCLUDE:CONTEXT_LINES_BEFORE:CONTEXT_LINES_AFTER:CASE_SENSITIVE Y/N:GREP_COLOR [Y]es/[A]uto/[N]ever:GREP_COLORS(does not work with EXCLUDE):Show Matched Only(Y/N)
+INCLUDE:3:3:N:N:mt=38;5;15;48;5;18:Y
 Errors in file
-ORA-[[:digit:]]{1,}
-PLS[[:digit:]]{1,}
-TNS[[:digit:]]{1,}
+ORA-[[:digit:]]{1,5}
+PLS-[[:digit:]]{1,5}
+TNS-[[:digit:]]{1,5}
 Starting ORACLE instance
 shutdown
 WARNING:
@@ -15,5 +15,5 @@ deadlock
 IPC Send timeout
 evict
 LMS
-terminat
+terminate
 Checkpoint not complete

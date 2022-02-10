@@ -31,6 +31,7 @@ configNameRef[2]='contextLinesAfter'
 configNameRef[3]='caseSensitive'
 configNameRef[4]='grepColor'
 configNameRef[5]='grepColors'
+configNameRef[6]='showMatchedOnly'
 
 declare grepIncExFlag
 
@@ -81,6 +82,10 @@ case ${configVals[grepColor]} in
 	N|n) grepColorFlag='never';;
 esac
 
+declare showMatchedOnlyFlag=''
+[[ ${configVals[showMatchedOnly]} == 'Y' ]] && { showMatchedOnlyFlag='-o'; }
+
+
 : << 'GREP-COLOR-COMMENTS'
 
 run grep-colors.sh to see available colors
@@ -103,8 +108,7 @@ GREP-COLOR-COMMENTS
 
 # use the exclude file to filter out things we never want to see
 
-# remove comments and blank lines from the exclusion file
-grep --color=$grepColorFlag -vE -f <(grep -vE '^\s+#|^\s*$' always-exclude.rules) $msgFile | \
-	grep --color=$grepColorFlag -E $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile)
+grep --color=$grepColorFlag -v -E -f always-exclude.rules $msgFile | \
+	grep --color=$grepColorFlag -E $showMatchedOnlyFlag $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile)
 
 

@@ -6,9 +6,15 @@ PLS-00201
 ALTER SYSTEM ARCHIVE LOG
 CAPTURE OGG
 GoldenGate Capture OGG
-Thread 1 advanced to log sequence
+Thread 1 advanced to log sequence 
+Archived Log entry
 Current log#
 # exclude ARC archive log info lines
-^ARC[[:digit:]]
+^ARC[[:digit:]] 
 # exclude timestamps at the beginning of the line
 ^202[[:digit:]]-[[:digit:]]{2}-[[:digit:]]{2}
+^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s
+^D[MW]00 started with pid
+^\s+Time:\s+[[:digit:]]{2}
+^USER
+^SER

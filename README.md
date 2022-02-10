@@ -764,6 +764,47 @@ The alert log is now filtered with the rules in this file before processing with
 
 This currently removes `ALTER SYSTEM ARCHIVE LOG` and `ORA-06512`.
 
-The ORa-06512 error is not useful in this context, as it is an ancillary error message
+The ORA-06512 error is not useful in this context, as it is an ancillary error message
+
+## crs-alert.rules
+
+There are currently no rules in this file
+
+## log-filter.rules
+
+This is an EXCLUDE rules file, that is, the regular expresssions in this file will prevent  seeing these lines from the log file.
+
+Currently there is just one rule in this file
+
+## ora-alert.rules.
+
+This is an INCLUDE rules file. This means that the only lines output from a log file must be matched by a regex in this file.
+
+The `Show Matched Only` flag is set to `Y`, which will cause grep to use the `-o` flag.  Only the matching portions of lines will appear.
+
+This allows for a bucket histogram of items found:
+
+```text
+
+$  ./log-filter.sh ora-alert.rules logs/server004/alert_dbp004-recent.log  | sort | uniq -c | sort -n
+      1 ERROR
+      1 Errors in file
+      1 ORA-02395
+      1 Starting ORACLE instance
+      1 Warning:
+      4 ORA-00000
+      4 shutdown
+      5 ORA-48180
+      8 ALTER DATABASE
+     10 Error
+     47 --
+     70 alter database
+     91 ORA-2396
+    528 ORA-3136
+    528 TNS-12535
+    528 WARNING:
+   1061 error
+   6671 Checkpoint not complete
+```
 
 
