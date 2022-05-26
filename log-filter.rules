@@ -1,3 +1,13 @@
 #INCLUDE/EXCLUDE:CONTEXT_LINES_BEFORE:CONTEXT_LINES_AFTER:CASE_SENSITIVE Y/N:GREP_COLOR [Y]es/[A]uto/[N]ever:GREP_COLORS(does not work with EXCLUDE):Show Matched Only (N/Y)
 EXCLUDE:0:0:N:Y:mt=38;5;16;48;5;4:N
+ora192rac01 journal: orachk
+ora192rac01 su:
+ora192rac01 systemd: Started Session
+ora192rac01 systemd: Removed slice User Slice
+ora192rac01 systemd-logind:
+ora192rac01 systemd: Created slice User
+ora192rac01 systemd: Starting Cleanup
+ora192rac01 systemd: Started Cleanup
+ora192rac01 systemd: Starting update
+ora192rac01 systemd: Started update
 auditd\[.+\]: Audit daemon rotating log files
