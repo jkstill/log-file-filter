@@ -6,11 +6,11 @@ PLS-00201
 ALTER SYSTEM ARCHIVE LOG
 CAPTURE OGG
 GoldenGate Capture OGG
-Thread 1 advanced to log sequence 
+Thread [[:digit:]]+ advanced to log sequence
 Archived Log entry
 Current log#
 # exclude ARC archive log info lines
-^ARC[[:digit:]] 
+^ARC[[:digit:]]
 # exclude timestamps at the beginning of the line
 ^202[[:digit:]]-[[:digit:]]{2}-[[:digit:]]{2}
 ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s
@@ -18,3 +18,14 @@ Current log#
 ^\s+Time:\s+[[:digit:]]{2}
 ^USER
 ^SER
+# two messages for controlfile autobackup
+^Control autobackup written to DISK
+^handle
+# patch numbers
+#32455516,32455650,32455742,32455961,32457252,32457974,32459153,32459632,
+^[[:digit:]]{3,8},[[:digit:]]{3,8},[[:digit:]]{3,8},[[:digit:]]{3,8},[[:digit:]]{3,8},[[:digit:]]{3,8},[[:digit:]]{3,8},[[:digit:]]{3,8},
+^Errors in file
+^Incident details in
+# ignore interval partitions added
+#TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION....
+^TABLE\s+.+:\s+ADDED INTERVAL PARTITION
