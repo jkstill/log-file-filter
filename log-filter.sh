@@ -107,8 +107,6 @@ GREP-COLOR-COMMENTS
 #grep --color=$grepColorFlag -E $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile) $msgFile
 
 # use the exclude file to filter out things we never want to see
-
-grep --color=$grepColorFlag -v -E -f always-exclude.rules $msgFile | \
-	grep --color=$grepColorFlag -E $showMatchedOnlyFlag $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile)
-
+grep --color=$grepColorFlag -v -E -f <(grep -Ev '^\s*$|^\s*#' always-exclude.rules) $msgFile | \
+	grep --color=$grepColorFlag -E $showMatchedOnlyFlag $caseSensitivityFlag $grepIncExFlag $contextBeforeOption $contextAfterOption -f <(tail -n+3 $rulesFile | grep -Ev '^\s*$|^\s*#')
 
